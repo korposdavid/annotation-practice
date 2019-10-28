@@ -1,11 +1,12 @@
 public class Routes {
 
-    public String test1(){
-        return "";
+    @WebRoute(path = "/index")
+    public String onIndex(){
+        return "this is the index page";
     }
 
-    public String test2(){
-        return "";
+    @WebRoute(path = "/test")
+    public String onTest(){
+        return "this is the test page";
     }
-
 }
