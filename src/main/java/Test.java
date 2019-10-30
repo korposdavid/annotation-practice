@@ -10,15 +10,18 @@ import com.sun.net.httpserver.HttpServer;
 public class Test {
     public static void main(String[] args) throws Exception {
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        createContext(server);
+        server.setExecutor(null);
+        server.start();
+    }
+
+    public static void createContext(HttpServer server) {
         for (Method m : Routes.class.getMethods()) {
             if (m.isAnnotationPresent(WebRoute.class)) {
                 String path = m.getAnnotation(WebRoute.class).path();
                 server.createContext(path, new myHandler(m));
             }
         }
-
-        server.setExecutor(null);
-        server.start();
     }
 
     static class myHandler implements HttpHandler {
