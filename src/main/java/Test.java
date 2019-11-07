@@ -19,15 +19,15 @@ public class Test {
         for (Method m : Routes.class.getMethods()) {
             if (m.isAnnotationPresent(WebRoute.class)) {
                 String path = m.getAnnotation(WebRoute.class).path();
-                server.createContext(path, new myHandler(m));
+                server.createContext(path, new MyHandler(m));
             }
         }
     }
 
-    static class myHandler implements HttpHandler {
+    static class MyHandler implements HttpHandler {
         Method methodToInvoke;
 
-        public myHandler(Method methodToInvoke) {
+        public MyHandler(Method methodToInvoke) {
             this.methodToInvoke = methodToInvoke;
         }
 
